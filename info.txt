@@ -1,7 +1,6 @@
 registre pour int:
 	rdi, rsi, rdx, rcx, r8, r9
 
-
 registre pour float, double:
 	xmm0, xmm1, xmm2, xmm3, xmm4, xmm5, xmm6, xmm7
 
@@ -12,15 +11,69 @@ register for return value:
 stack pointer:
 	rsp
 
-call-save registers:
-	rbp, rbx, r12, r13, r15
+B ->> 8
+W ->> 16
+D ->> 32
+Q ->> 64
+
+registre de travail
+	EAX:				32
+		AX:				16
+			AH - AL		8/8
+
+	AX:	[ACCUMULATOR AUX] calculs arithmetique ou pour envoyer un parametre a une interruption
+	BX:	[BASE REGISTER AUX]  calculs arithmetique ou calculs sur adresse
+	CX:	[COUNTER AUX] compteur de boucle
+	DX:	[DATA AUX]  stocker des donnees destines aux fonctions
+
+registre d'offset
+	ESI:			32
+		SI:			16
+	
+	IP: [INSTRUCTION POINTER] registre qui pointe sur la prochaine instruction, il est indisponible directement.
+	SI: [SOURCE INDEX] utiliser lors des operations sur les strings il est associe au segment DS
+	DI: [DESTINATION INDEX] utiliser lors des operations sur les strings il est associe au segment DS
+	SP: [STACK POINTER] associe au registre de segment SS et indique le derniere element de la pile
+	BP: [BASE POINTER] associe au registre de segment SS pour acceder aux donnees de la pile lors des call
+
+registre de segment:
+	CS: [CODE SEGMENT] indique l'adresse du debut des instructions d'un programme ou d'une sous routine.
+	DS: [DATA SEGMENT] contient l'adresse du debut des donnees du programme.
+	SS: [STACK SEGMENT] pointe sur la pile
+	ES: [EXTRA SEGMENT] est utilisé, par défaut, par certaines instructions de copie de bloc. En dehors de ces instructions, le programmeur est libre de l’utiliser comme il l’entend
+	FS: [EXTRA SEGMENT]
+	GS: [EXTRA SEGMENT]
+
+registre de flag:
+	CF : Carry Flag - Indicateur de retenue
+
+	A la suite d'une opération, si le résultat est codé sur un nombre supérieur de bits, le bit de trop sera mis dans CF. Plusieurs instructions peuvent modifier son état : CLC pour le mettre à 0, STC à 1 et CMC inverse sa valeur.
+
+	PF : Parity Flag - Indicateur de parité
+
+	Egal à 1 si le nombre de bits d'une opérande (paramètre d'une instruction) est pair.
+
+	AF : Auxiliary carry Flag - Indicateur de retenue auxiliaire
+
+	Cet indicateur ressemble à CF.
+
+	ZF : Zero Flag - Indicateur zéro
+
+	Si le résultat d'une opération est nul (égal à 0) ZF passera à 1. Cet indicateur est souvent utilisé pour savoir si deux valeurs sont égales (en les soustrayant).
+
+	SF : Sign Flag - Indicateur de signe
+
+	SF passe à 1 quand le résultat est signé (négatif ou positif).
+
+	IF : Interruption Flag - Indicateur d'interruption
+
+	Il permet d'enlever la possibilité au processeur de contrôler les interruptions. Si IF = 1 les interruptions sont prises en compte et si IF = 0 elles sont ignorées. L'instruction STI met IF à 1 et CLI le met à 0.
+
+	DF : Direction Flag - Indicateur de direction
+
+	C'est ce Flag qui donne l'indication sur la manière de déplacer les pointeurs (références) lors des instructions de chaînes (soit positivement, soit négativement). STD le met à 1 et CLD à 0.
+
+	OF : Overflow Flag - Indicateur de dépassement
 
 
 
-
-ALL REGISTER:
-	R0  R1  R2  R3  R4  R5  R6  R7  R8
-	R9  R10  R11  R12  R13  R14  R15
-	RAX RCX RDX RBX RSP RBP RSI RDI
-
-	EAX EBX ECX EDX

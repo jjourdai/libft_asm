@@ -6,7 +6,7 @@
 /*   By: jjourdai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 14:58:51 by jjourdai          #+#    #+#             */
-/*   Updated: 2018/11/27 17:44:42 by jjourdai         ###   ########.fr       */
+/*   Updated: 2018/11/28 18:10:18 by jjourdai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@ int		ft_tolower(int c);
 int		ft_puts(const char *s);
 
 void	ft_bzero(void *s, size_t n);
-char	*ft_strcat(char *restrict s1, const char *restrict s2);
+size_t	ft_strlen(const char *str);
+void	*ft_memset(void *b, int c, size_t len);
+void	*ft_memcpy(void *restrict dst, const void *restrict src, size_t n);
 
+char	*ft_strdup(const char *s1);
+char	*ft_strcat(char *restrict s1, const char *restrict s2);
 #endif

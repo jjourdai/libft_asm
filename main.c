@@ -6,7 +6,7 @@
 /*   By: jjourdai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 15:05:45 by jjourdai          #+#    #+#             */
-/*   Updated: 2018/11/27 17:44:51 by jjourdai         ###   ########.fr       */
+/*   Updated: 2018/11/28 18:20:59 by jjourdai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,11 @@
 #include <inttypes.h>
 #include "libfts.h"
 #include "limits.h"
+#include "unistd.h"
 #include <ctype.h>
+#include <fcntl.h>
+#include <stdlib.h>
+#include <string.h>
 
 # define RED_TEXT(x) "\033[31;1m" x "\033[0m"
 # define GREEN_TEXT(x) "\033[32;1m" x "\033[0m"
@@ -73,18 +77,94 @@ void test_puts(void)
 	printf(GREEN_TEXT("Test Passed for ft_puts\n"));
 }
 
+void test_bzero(void)
+{
+	char str0[] = "dwajhdawjdawhjdgjwahdgajhdwgdaw";
+	char *str1 = strdup(str0);
+	int len = strlen(str0);
+
+	printf("%d\n", len); 	
+	bzero(str0, len);
+	ft_bzero(str1, len);
+	write(1, str1, len);
+//	puts(str1 + 1);
+//	puts(str1 + 2);
+}
+char *get_random_data()
+{
+	int			fd;
+	static char	buffer[512];
+
+	if ((fd = open("/dev/random", O_RDONLY)) == -1)
+		exit(fd);
+	read(fd, buffer, 128);
+	close(fd);
+	return (buffer);
+}
+
+void test_strlen(void)
+{
+	char	*string;
+	for (int i = 0; i < 100; i++) {
+		string = get_random_data();
+		//printf("%d %d\n", strlen(string), ft_strlen(string));
+		if (strlen(string) != ft_strlen(string)) {
+			printf("Test failed for strlen");
+			break ;
+		}
+	}
+}
+
+void test_memcpy(void)
+{
+	char	*string;
+	char	*buffer0 = malloc(512);
+	char	*buffer1 = malloc(512);
+	for (int i = 0; i < 100; i++) {
+		string = get_random_data();
+		memcpy(buffer0, string, strlen(string));
+		ft_memcpy(buffer1, string, strlen(string));
+		/*
+		puts(buffer0);
+		puts("=========================");
+		puts(buffer1);
+		*/
+		if (strcmp(buffer0, buffer1) != 0) {
+			printf("Test failed for memcpy\n");
+			break ;
+		}
+	}
+}
+
+void test_memset(void)
+{
+	char	*string;
+	char	*buffer0 = malloc(512);
+	char	*buffer1 = malloc(512);
+	int		value;
+	for (int i = 0; i < 100; i++) {
+		value = rand();
+		string = get_random_data();
+		memset(buffer0, value, strlen(string));
+		ft_memset(buffer1, value, strlen(string));
+//		puts(buffer0);
+//		puts(buffer1);
+		if (strcmp(buffer0, buffer1) != 0) {
+			printf("Test failed for memset\n");
+			break ;
+		}
+	}
+}
+
 int main(void)
 {
 /*
-	printf("%lld\n", maxofthree(1, -4, -7));
-	printf("%lld\n", maxofthree(2, -6, 1));
-	printf("%lld\n", maxofthree(2, 3, 1));
-	printf("%lld\n", maxofthree(-2, 4, 3));
-	printf("%lld\n", maxofthree(2, -6, 5));
-	printf("%lld\n", maxofthree(2, 4, 6));
 
-	test_is();
 */
+	test_is();
+	test_bzero();
+	test_strlen();
 	test_puts();
+	test_memset();
 	return (0);
 }

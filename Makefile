@@ -6,15 +6,13 @@
 #    By: jjourdai <jjourdai@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/17 13:28:01 by jjourdai          #+#    #+#              #
-#    Updated: 2018/11/27 16:26:37 by jjourdai         ###   ########.fr        #
+#    Updated: 2018/11/28 18:09:58 by jjourdai         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC_PATH = ./src/
 
-SRC_NAME = yolo.s \
-		   maxofthree.s \
-		   ft_isalpha.s \
+SRC_NAME = ft_isalpha.s \
 		   ft_isdigit.s \
 		   ft_isalnum.s \
 		   ft_isascii.s \
@@ -22,6 +20,10 @@ SRC_NAME = yolo.s \
 		   ft_toupper.s \
 		   ft_tolower.s \
 		   ft_puts.s \
+		   ft_bzero.s \
+		   ft_strlen.s \
+		   ft_memcpy.s \
+		   ft_memset.s \
 
 OBJ_PATH = .obj/
 

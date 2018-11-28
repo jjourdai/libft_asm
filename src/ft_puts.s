@@ -2,28 +2,28 @@
 %define STDOUT				1
 %define WRITE				4
 
+section .data
+	new_line dw 10
+	empty:
+		.string db "(null)", 10
+		.len equ $ - empty.string
+
 section .text
 	global _ft_puts
+	extern _ft_strlen
 
 _ft_puts:
 	cmp rdi, 0
 	je empty_string
 	mov rcx, rdi
-	mov rdx, 0
-
-_get_len:
-	mov eax, [rcx + rdx]
-	cmp eax, 0
-	je print
-	inc rdx
-	jmp _get_len
-
-print:
-	mov rsi, rdi
+	push rdi
+	call _ft_strlen
+	pop rsi
+	mov rdx, rax
 	mov rdi, STDOUT
 	mov rax, MACH_SYSCALL(WRITE)
 	syscall
-	mov rsi, new_line
+	lea rsi, [rel new_line]
 	mov rdx, 1
 	mov rax, MACH_SYSCALL(WRITE)
 	syscall
@@ -39,8 +39,4 @@ empty_string:
 	mov rax, 10
 	ret
 
-section .data
-	new_line db 10
-	empty:
-		.string db "(null)", 10
-		.len equ $ - empty.string
+
