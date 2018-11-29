@@ -6,7 +6,7 @@
 /*   By: jjourdai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 15:05:45 by jjourdai          #+#    #+#             */
-/*   Updated: 2018/11/28 18:20:59 by jjourdai         ###   ########.fr       */
+/*   Updated: 2018/11/29 19:15:24 by jjourdai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,20 +120,24 @@ void test_memcpy(void)
 	char	*string;
 	char	*buffer0 = malloc(512);
 	char	*buffer1 = malloc(512);
+
+	char	*test0;
+	char	*test1;
 	for (int i = 0; i < 100; i++) {
 		string = get_random_data();
-		memcpy(buffer0, string, strlen(string));
-		ft_memcpy(buffer1, string, strlen(string));
+		test0 = memcpy(buffer0, string, strlen(string));
+		test1 = ft_memcpy(buffer1, string, strlen(string));
 		/*
 		puts(buffer0);
 		puts("=========================");
 		puts(buffer1);
 		*/
-		if (strcmp(buffer0, buffer1) != 0) {
+		if (strcmp(test0, test1) != 0 || strcmp(buffer0, buffer1) != 0) {
 			printf("Test failed for memcpy\n");
-			break ;
+			return ;
 		}
 	}
+	printf("Test passed for memcpy\n");
 }
 
 void test_memset(void)
@@ -156,15 +160,74 @@ void test_memset(void)
 	}
 }
 
+void test_strcat(void)
+{
+	char	*string;
+	char	*base;
+	char	*buffer0 = malloc(1024);
+	char	*buffer1 = malloc(1024);
+	for (int i = 0; i < 100; i++) {
+		string = get_random_data();
+		base = get_random_data();
+		memcpy(buffer0, base, 512);
+		memcpy(buffer1, base, 512);
+		puts("===================string===========================");
+		puts(string);
+		printf("\n%d\n", strlen(string)); 
+		strcat(buffer0, string);
+		ft_strcat(buffer1, string);
+		//printf("%s\n", strcat(buffer0, string));
+		//printf("%s\n", ft_strcat(buffer1, string));
+		//printf("%s\n", string);
+		puts("=============");
+		puts("--------------------base------------------");
+		puts(buffer0);
+		puts("===================cpy===========================");
+		puts(buffer1);
+		bzero(buffer0, 512);
+		bzero(buffer1, 512);
+		if (strcmp(buffer0, buffer1) != 0) {
+			printf("Test failed for strcat on %d\n", i);
+			break ;
+		}
+	}
+}
+
+void test_strdup(void)
+{
+	char	*string;
+	char	*buffer0;
+	char	*buffer1;
+	for (int i = 0; i < 100; i++) {
+		string = get_random_data();
+		buffer0 = strdup(string);
+		buffer1 = ft_strdup(string);
+		/*
+		puts("=============");
+		puts("--------------------base------------------");
+		puts(buffer0);
+		puts("===================cpy===========================");
+		puts(buffer1);
+		*/
+		if (strcmp(buffer0, buffer1) != 0) {
+			printf("Test failed for strdup on %d\n", i);
+			return ;
+		}
+	}
+	printf("Test passed for strdup\n");
+}
+
 int main(void)
 {
 /*
-
-*/
 	test_is();
 	test_bzero();
 	test_strlen();
 	test_puts();
 	test_memset();
+	test_strcat();
+	test_memcpy();
+	test_strdup();
+*/
 	return (0);
 }

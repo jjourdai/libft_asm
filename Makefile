@@ -6,7 +6,7 @@
 #    By: jjourdai <jjourdai@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/17 13:28:01 by jjourdai          #+#    #+#              #
-#    Updated: 2018/11/28 18:09:58 by jjourdai         ###   ########.fr        #
+#    Updated: 2018/11/29 18:13:28 by jjourdai         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,8 @@ SRC_NAME = ft_isalpha.s \
 		   ft_strlen.s \
 		   ft_memcpy.s \
 		   ft_memset.s \
+		   ft_strcat.s \
+		   ft_strdup.s \
 
 OBJ_PATH = .obj/
 
