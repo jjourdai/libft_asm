@@ -6,7 +6,7 @@
 /*   By: jjourdai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 15:05:45 by jjourdai          #+#    #+#             */
-/*   Updated: 2018/11/29 19:15:24 by jjourdai         ###   ########.fr       */
+/*   Updated: 2018/11/30 17:28:59 by jjourdai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@
 #include <fcntl.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/stat.h>
+#include <sys/mman.h>
 
 # define RED_TEXT(x) "\033[31;1m" x "\033[0m"
 # define GREEN_TEXT(x) "\033[32;1m" x "\033[0m"
 # define BLUE_TEXT(x) "\033[34;1m" x "\033[0m"
-
-int64_t maxofthree(int64_t, int64_t, int64_t);
 
 void test_is(void)
 {
@@ -173,7 +173,7 @@ void test_strcat(void)
 		memcpy(buffer1, base, 512);
 		puts("===================string===========================");
 		puts(string);
-		printf("\n%d\n", strlen(string)); 
+		printf("\n%lu\n", strlen(string)); 
 		strcat(buffer0, string);
 		ft_strcat(buffer1, string);
 		//printf("%s\n", strcat(buffer0, string));
@@ -217,10 +217,34 @@ void test_strdup(void)
 	printf("Test passed for strdup\n");
 }
 
+void test_cat(void)
+{
+	int fd;
+	struct stat test;
+
+	fd = open("main.c", O_RDONLY);
+	//fd = open("/dev/urandom", O_RDONLY);
+	fstat(fd, &test);
+
+	printf("my cat    ->>>> %d\n", ft_cat(fd));
+	perror("error ?");
+	printf("%d\n", ft_cat(0));
+	perror("error ?");
+	printf("%d\n", ft_cat(1));
+	perror("error ?");
+	printf("%d\n", ft_cat(-1000));
+	perror("error ?");
+	printf("%d\n", ft_cat(-1));
+	perror("error ?");
+}
+
 int main(void)
 {
+
 /*
-	test_is();
+
+	test_cat();
+*/	test_is();
 	test_bzero();
 	test_strlen();
 	test_puts();
@@ -228,6 +252,5 @@ int main(void)
 	test_strcat();
 	test_memcpy();
 	test_strdup();
-*/
 	return (0);
 }
