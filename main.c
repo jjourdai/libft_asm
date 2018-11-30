@@ -6,7 +6,7 @@
 /*   By: jjourdai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 15:05:45 by jjourdai          #+#    #+#             */
-/*   Updated: 2018/11/30 17:28:59 by jjourdai         ###   ########.fr       */
+/*   Updated: 2018/11/30 19:35:39 by jjourdai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,9 @@ void test_bzero(void)
 char *get_random_data()
 {
 	int			fd;
-	static char	buffer[512];
+	char	*buffer;
 
+	buffer = malloc (512);
 	if ((fd = open("/dev/random", O_RDONLY)) == -1)
 		exit(fd);
 	read(fd, buffer, 128);
@@ -238,19 +239,41 @@ void test_cat(void)
 	perror("error ?");
 }
 
+void test_strcmp(void)
+{
+	char	*string0 = "1221873912739812caca";
+	char	*string1 = "1221873912739812cbcb";
+	for (int i = 0; i < 100; i++) {
+		//string0 = get_random_data();
+		//string1 = get_random_data();
+		puts("=============");
+		puts("--------------------base------------------");
+		puts(string0);
+		puts("===================cpy===========================");
+		puts(string1);
+		printf("%d\n", ft_strcmp(string0, string1));
+		if (ft_strcmp(string0, string1) != strcmp(string0, string1)) {
+			printf("Test failed for strcmp on %d\n", i);
+			return ;
+		}
+	}
+	printf("Test passed for strcmp\n");
+}
+
 int main(void)
 {
 
 /*
-
-	test_cat();
-*/	test_is();
+ 	test_is();
 	test_bzero();
 	test_strlen();
 	test_puts();
 	test_memset();
-	test_strcat();
 	test_memcpy();
 	test_strdup();
+	test_cat();
+	test_strcat();
+*/	
+	test_strcmp();
 	return (0);
 }

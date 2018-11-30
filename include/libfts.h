@@ -6,7 +6,7 @@
 /*   By: jjourdai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 14:58:51 by jjourdai          #+#    #+#             */
-/*   Updated: 2018/11/30 16:39:48 by jjourdai         ###   ########.fr       */
+/*   Updated: 2018/11/30 18:15:40 by jjourdai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,7 @@ char	*ft_strcat(char *restrict s1, const char *restrict s2);
 int		ft_cat_mmap(int fd);
 
 int		ft_cat(int fd);
+
+int		ft_strcmp(const char *s1, const char *s2);
 
 #endif
