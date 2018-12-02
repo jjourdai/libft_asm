@@ -8,14 +8,11 @@ _ft_strcmp:
 	
 	repe cmpsb
 	
-	inc rdi
-	inc rsi
-
 	mov rax, 0
 	mov rbx, 0
 
-	mov al, [rel rdi]
-	mov bl, [rel rsi]
+	mov al, [rel rdi - 1]
+	mov bl, [rel rsi - 1]
 	sub eax, ebx
 
 	ret

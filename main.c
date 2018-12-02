@@ -241,17 +241,24 @@ void test_cat(void)
 
 void test_strcmp(void)
 {
-	char	*string0 = "1221873912739812caca";
-	char	*string1 = "1221873912739812cbcb";
+	char	*string0 = "ca1234";
+	char	*string1 = "ca1234";
+
+	ft_strcmp("1", "1234");
+return ;
 	for (int i = 0; i < 100; i++) {
-		//string0 = get_random_data();
-		//string1 = get_random_data();
+		string0 = get_random_data();
+		string1 = get_random_data();
 		puts("=============");
 		puts("--------------------base------------------");
 		puts(string0);
 		puts("===================cpy===========================");
 		puts(string1);
+		printf("%d\n", strcmp(string0, string1));
+		puts("===================mystrcmp===========================");
 		printf("%d\n", ft_strcmp(string0, string1));
+		//ft_strcmp(string0, string1);
+		puts("===================end===========================");
 		if (ft_strcmp(string0, string1) != strcmp(string0, string1)) {
 			printf("Test failed for strcmp on %d\n", i);
 			return ;
