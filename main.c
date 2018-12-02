@@ -244,8 +244,6 @@ void test_strcmp(void)
 	char	*string0 = "ca1234";
 	char	*string1 = "ca1234";
 
-	ft_strcmp("1", "1234");
-return ;
 	for (int i = 0; i < 100; i++) {
 		string0 = get_random_data();
 		string1 = get_random_data();

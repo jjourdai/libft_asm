@@ -1,8 +1,5 @@
 section .text
 	global _ft_strcmp
-	extern _puts
-	extern _strlen
-
 
 _ft_strcmp:
 	
