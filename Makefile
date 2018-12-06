@@ -6,7 +6,7 @@
 #    By: jjourdai <jjourdai@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/17 13:28:01 by jjourdai          #+#    #+#              #
-#    Updated: 2018/11/30 18:12:57 by jjourdai         ###   ########.fr        #
+#    Updated: 2018/12/06 18:46:25 by jjourdai         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,10 @@ SRC_NAME = ft_isalpha.s \
 		   ft_cat_mmap.s \
 		   ft_cat.s \
 		   ft_strcmp.s \
+		   ft_isblank.s \
+		   ft_isblank_v2.s \
+		   ft_atoi_u.s \
+		   ft_atoi.s \
 
 OBJ_PATH = .obj/
 
@@ -47,8 +51,7 @@ OBJ = $(addprefix $(OBJ_PATH), $(OBJ_NAME))
 
 MAIN_TEST = main_test
 
-.PHONY: all, clean, fclean, re, $(LIBFT)
-
+.PHONY: all, clean, fclean, re,
 all: $(NAME)
 
 $(NAME): $(OBJ) ./include/libfts.h

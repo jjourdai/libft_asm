@@ -6,7 +6,7 @@
 /*   By: jjourdai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 15:05:45 by jjourdai          #+#    #+#             */
-/*   Updated: 2018/11/30 19:35:39 by jjourdai         ###   ########.fr       */
+/*   Updated: 2018/12/06 19:00:08 by jjourdai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,8 @@ void test_bzero(void)
 	bzero(str0, len);
 	ft_bzero(str1, len);
 	write(1, str1, len);
-//	puts(str1 + 1);
-//	puts(str1 + 2);
+	//	puts(str1 + 1);
+	//	puts(str1 + 2);
 }
 char *get_random_data()
 {
@@ -129,10 +129,10 @@ void test_memcpy(void)
 		test0 = memcpy(buffer0, string, strlen(string));
 		test1 = ft_memcpy(buffer1, string, strlen(string));
 		/*
-		puts(buffer0);
-		puts("=========================");
-		puts(buffer1);
-		*/
+		   puts(buffer0);
+		   puts("=========================");
+		   puts(buffer1);
+		   */
 		if (strcmp(test0, test1) != 0 || strcmp(buffer0, buffer1) != 0) {
 			printf("Test failed for memcpy\n");
 			return ;
@@ -152,8 +152,8 @@ void test_memset(void)
 		string = get_random_data();
 		memset(buffer0, value, strlen(string));
 		ft_memset(buffer1, value, strlen(string));
-//		puts(buffer0);
-//		puts(buffer1);
+		//		puts(buffer0);
+		//		puts(buffer1);
 		if (strcmp(buffer0, buffer1) != 0) {
 			printf("Test failed for memset\n");
 			break ;
@@ -204,12 +204,12 @@ void test_strdup(void)
 		buffer0 = strdup(string);
 		buffer1 = ft_strdup(string);
 		/*
-		puts("=============");
-		puts("--------------------base------------------");
-		puts(buffer0);
-		puts("===================cpy===========================");
-		puts(buffer1);
-		*/
+		   puts("=============");
+		   puts("--------------------base------------------");
+		   puts(buffer0);
+		   puts("===================cpy===========================");
+		   puts(buffer1);
+		   */
 		if (strcmp(buffer0, buffer1) != 0) {
 			printf("Test failed for strdup on %d\n", i);
 			return ;
@@ -265,20 +265,54 @@ void test_strcmp(void)
 	printf("Test passed for strcmp\n");
 }
 
+void test_atoi(void)
+{
+	char *str = "\f \r \f \v \n 500";
+	
+	printf("%d %d\n", atoi(str), ft_atoi_u(str));
+
+	//printf(">%c< >%c< >%c<\n", '\v','\f', '\r');
+}
+
+void test_isblank(void)
+{
+	char	*string;
+	int		j = 0;
+
+	for (int i = 0; i < 512; i++) {
+		if (i == 0 || i % 511 == 0) {
+			string = get_random_data();
+			i = 0;
+			if (j == 100)
+				break ;
+			j++;
+		}
+		if (isblank(string[i]) != ft_isblank(string[i])) {
+
+			printf("Test failed for isblank on |%d| >>>>>|%c|<<<<\n", string[i], string[i]);
+			return ;
+		}
+	}
+	printf("Test passed for isblank\n");
+}
+
 int main(void)
 {
 
-/*
- 	test_is();
-	test_bzero();
-	test_strlen();
-	test_puts();
-	test_memset();
-	test_memcpy();
-	test_strdup();
-	test_cat();
-	test_strcat();
-*/	
-	test_strcmp();
-	return (0);
+	/*
+	   test_is();
+	   test_strlen();
+	   test_puts();
+	   test_memset();
+	   test_memcpy();
+	   test_strdup();
+	   test_cat();
+	   test_strcat();
+	   test_strcmp();
+	   test_bzero();
+   */
+	   test_atoi();
+	   //test_isblank();
+
+		return (0);
 }

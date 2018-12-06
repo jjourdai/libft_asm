@@ -6,7 +6,7 @@
 /*   By: jjourdai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 14:58:51 by jjourdai          #+#    #+#             */
-/*   Updated: 2018/11/30 18:15:40 by jjourdai         ###   ########.fr       */
+/*   Updated: 2018/12/06 18:30:57 by jjourdai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,8 @@ int		ft_cat_mmap(int fd);
 int		ft_cat(int fd);
 
 int		ft_strcmp(const char *s1, const char *s2);
+int		ft_atoi_u(const char *str);
+int		ft_isblank(int c);
+int		ft_isblank_v2(int c);
 
 #endif

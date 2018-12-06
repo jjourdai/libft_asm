@@ -3,7 +3,6 @@ section .text
 	extern _ft_strlen
 	extern _ft_memcpy
 	extern _malloc
-	extern _exit
 
 _ft_strdup:
 	push rbp
@@ -28,6 +27,6 @@ _ft_strdup:
 
 exit:
 	pop rdi
-	mov rdi, 0
+	mov rax, 0
 	pop rbp
-	call _exit
+	ret
