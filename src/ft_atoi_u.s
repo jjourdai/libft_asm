@@ -9,21 +9,6 @@ _ft_atoi_u:
 	
 	mov rax, [rel value]
 
-_drop_char:
-	mov rdx, 0
-	mov dl, byte [rel rdi]
-	cmp rdx, 0
-	je _stop
-	inc rdi
-	push rdi
-	mov rdi, 0
-	mov rdi, rdx
-	call _ft_isblank_v2
-	pop rdi
-	cmp rax, 1
-	je _drop_char
-	dec rdi
-
 _loop
 	cmp byte [rel rdi], 0
 	je _stop
@@ -50,7 +35,6 @@ _loop
 	
 	inc rdi
 	jmp _loop
-
 
 _stop:
 	pop rbp

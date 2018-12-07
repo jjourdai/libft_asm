@@ -6,7 +6,7 @@
 /*   By: jjourdai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 14:58:51 by jjourdai          #+#    #+#             */
-/*   Updated: 2018/12/06 18:30:57 by jjourdai         ###   ########.fr       */
+/*   Updated: 2018/12/07 17:59:49 by jjourdai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,19 @@ void	*ft_memcpy(void *restrict dst, const void *restrict src, size_t n);
 
 char	*ft_strdup(const char *s1);
 char	*ft_strcat(char *restrict s1, const char *restrict s2);
-int		ft_cat_mmap(int fd);
 
 int		ft_cat(int fd);
 
 int		ft_strcmp(const char *s1, const char *s2);
-int		ft_atoi_u(const char *str);
-int		ft_isblank(int c);
-int		ft_isblank_v2(int c);
+
+
+unsigned int	ft_atoi_u(const char *str);
+int				ft_atoi(const char *str);
+int				ft_isblank(int c);
+int				ft_isblank_v2(int c);
+int				ft_cat_mmap(int fd);
+int				ft_print_bits(uint64_t value);
+char			*ft_strmap(char const *s, char (*f)(char));
+
 
 #endif

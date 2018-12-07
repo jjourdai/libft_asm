@@ -1,8 +1,8 @@
 section .text
 	global _ft_atoi
+	extern _ft_atoi_u
 	extern _ft_isdigit
 	extern _ft_isblank_v2
-	extern _puts
 
 _ft_atoi:
 	push rbp
@@ -24,10 +24,28 @@ _drop_char:
 	je _drop_char
 	dec rdi
 
-_core:
+_check:
 	mov rdx, 0
 	mov dl, byte [rel rdi]
-	cmp rdx, 45
+	cmp rdx, 45 ; -
+	je _less
+	cmp rdx, 43 ; +
+	je _more
+	call _ft_atoi_u
+	jmp _stop
+
+_more:
+	inc rdi
+	call _ft_atoi_u
+	jmp _stop
+
+_less:
+	inc rdi
+	call _ft_atoi_u
+	mov rbx, 0
+	mov ebx, -1
+	imul ebx
+
 
 _stop:
 	pop rbp

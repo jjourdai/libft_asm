@@ -6,7 +6,7 @@
 /*   By: jjourdai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 15:05:45 by jjourdai          #+#    #+#             */
-/*   Updated: 2018/12/06 19:00:08 by jjourdai         ###   ########.fr       */
+/*   Updated: 2018/12/07 18:32:16 by jjourdai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -267,11 +267,49 @@ void test_strcmp(void)
 
 void test_atoi(void)
 {
-	char *str = "\f \r \f \v \n 500";
+	char *str = "\f \r \f \v \n +500";
+	char *string;
 	
-	printf("%d %d\n", atoi(str), ft_atoi_u(str));
+	if (atoi(str) != ft_atoi(str))
+		printf("Test failed for atoi >>>>>|%s|<<<<\n", str);
 
 	//printf(">%c< >%c< >%c<\n", '\v','\f', '\r');
+	for (int i = 0; i < 512; i++) {
+		string = get_random_data();
+		if (ft_atoi(string) != atoi(string)) {
+			printf("Test failed for atoi >>>>>|%s|<<<<\n", string);
+			return ;
+		}
+	}
+	const char *str_value[] = {
+		"2147483647",
+	   	"-2147483648",
+	   	"4294967295",
+		"-128",
+		"+127",
+		"255",
+		"16",
+		"-16",
+		"+16",
+		"-32768",
+		"32768",
+		"++32745",
+		"65535",
+		"4294967295",
+		"-9223372036854775808",
+		"+9223372036854775807",
+		"18446744073709551615",
+		"- 42",
+	};
+	int value0;
+	int value1;
+	for (int i = 0; i < sizeof(str_value) / sizeof(char*); i++) {
+		if ((value0 = ft_atoi(str_value[i])) != (value1 = atoi(str_value[i]))) {
+			printf("Test failed for atoi >>>>>|%s|<<<< [%d] != [%d]\n", str_value[i], value0, value1);
+			return ;
+		}
+	}
+	printf("Test passed for atoi\n");
 }
 
 void test_isblank(void)
@@ -296,23 +334,58 @@ void test_isblank(void)
 	printf("Test passed for isblank\n");
 }
 
+void test_print_bits(void)
+{
+	printf("\n>>%u<<\n", ft_print_bits(0xFF));
+	printf("\n>>%u<<\n", ft_print_bits(0x0F));
+	printf("\n>>%u<<\n", ft_print_bits(0xF0));
+	printf("\n>>%u<<\n", ft_print_bits(254));
+	printf("\n>>%u<<\n", ft_print_bits(0xFFF0FF));
+	printf("\n>>%u<<\n", ft_print_bits(0xF0F0FF));
+	printf("\n>>%u<<\n", ft_print_bits(0xFF0F0F));
+	printf("\n>>%u<<\n", ft_print_bits(0xF000000000000000));
+}
+
 int main(void)
 {
 
-	/*
-	   test_is();
-	   test_strlen();
-	   test_puts();
-	   test_memset();
-	   test_memcpy();
-	   test_strdup();
-	   test_cat();
-	   test_strcat();
-	   test_strcmp();
-	   test_bzero();
-   */
-	   test_atoi();
-	   //test_isblank();
+/*
+	test_is();
+	test_strlen();
+	test_puts();
+	test_memset();
+	test_memcpy();
+	test_strdup();
+	test_cat();
+	test_strcat();
+	test_strcmp();
+	test_bzero();
+	test_isblank();
+	test_atoi();
+*/
+	test_print_bits();
 
-		return (0);
+	return (0);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

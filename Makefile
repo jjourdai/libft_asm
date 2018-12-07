@@ -6,7 +6,7 @@
 #    By: jjourdai <jjourdai@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/17 13:28:01 by jjourdai          #+#    #+#              #
-#    Updated: 2018/12/06 18:46:25 by jjourdai         ###   ########.fr        #
+#    Updated: 2018/12/07 18:00:03 by jjourdai         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,8 @@ SRC_NAME = ft_isalpha.s \
 		   ft_isblank_v2.s \
 		   ft_atoi_u.s \
 		   ft_atoi.s \
+		   ft_print_bits.s \
+		   ft_strmap.s \
 
 OBJ_PATH = .obj/
 
@@ -63,7 +65,7 @@ test: $(NAME)
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.s
 	@mkdir $(OBJ_PATH) 2> /dev/null || true
-	$(NASM) $(CFLAGS) $< -o $@	
+	$(NASM) $(CFLAGS) $< -o $@ -g
 
 clean:
 	rm -fv $(OBJ)
