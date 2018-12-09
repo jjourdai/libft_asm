@@ -9,7 +9,7 @@ _ft_atoi_u:
 	
 	mov rax, [rel value]
 
-_loop
+_loop:
 	cmp byte [rel rdi], 0
 	je _stop
 

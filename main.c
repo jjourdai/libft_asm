@@ -346,6 +346,19 @@ void test_print_bits(void)
 	printf("\n>>%u<<\n", ft_print_bits(0xF000000000000000));
 }
 
+char wrapp_toupper(char c)
+{
+	return ((char)toupper(c));
+}
+
+void test_strmap(void)
+{
+	char str[] = "je suis travail";
+	char *new = NULL;
+
+	printf("%s\n", ft_strmap(str, wrapp_toupper));
+}
+
 int main(void)
 {
 
@@ -362,9 +375,9 @@ int main(void)
 	test_bzero();
 	test_isblank();
 	test_atoi();
-*/
 	test_print_bits();
-
+*/
+	test_strmap();
 	return (0);
 }
 
