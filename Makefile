@@ -6,7 +6,7 @@
 #    By: jjourdai <jjourdai@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/17 13:28:01 by jjourdai          #+#    #+#              #
-#    Updated: 2018/12/07 18:00:03 by jjourdai         ###   ########.fr        #
+#    Updated: 2018/12/10 11:36:15 by jjourdai         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,7 +61,7 @@ $(NAME): $(OBJ) ./include/libfts.h
 	ranlib $(NAME)
 
 test: $(NAME)
-	gcc main.c -o $(MAIN_TEST) $(NAME) -I ./include
+	gcc main.c -o $(MAIN_TEST) $(NAME) -I ./include -Wall -Wextra -Werror
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.s
 	@mkdir $(OBJ_PATH) 2> /dev/null || true

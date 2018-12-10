@@ -1,4 +1,6 @@
 %define FILENO_STDOUT 1
+%define MACH_SYSCALL(nb)	0x2000000 | nb
+%define WRITE				4
 
 section .text
 	global _ft_print_bits
@@ -29,7 +31,8 @@ _print:
 	lea rsi, [rsp + 8]
 	mov rdi, FILENO_STDOUT
 	mov rdx, 1
-	call _write
+	mov rax, MACH_SYSCALL(WRITE)
+	syscall
 	add rsp, 24
 	pop rbp
 	ret

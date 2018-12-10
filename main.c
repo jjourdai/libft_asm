@@ -6,7 +6,7 @@
 /*   By: jjourdai <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/26 15:05:45 by jjourdai          #+#    #+#             */
-/*   Updated: 2018/12/07 18:32:16 by jjourdai         ###   ########.fr       */
+/*   Updated: 2018/12/10 11:39:04 by jjourdai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,15 @@ void test_puts(void)
 	printf(BLUE_TEXT("Test for ft_puts\n"));
 	char *str = "COCORICOdwlkajdklawjdawkljd";
 	if (puts(str) != ft_puts(str)) {
-		printf(RED_TEXT("Test failed for ft_puts on %s\n"), str);
+		printf(RED_TEXT("Test failed for ft_puts on [%s]\n"), str);
 		return ;
 	}
 	if (puts(NULL) != ft_puts(NULL)) {
-		printf(RED_TEXT("Test failed for ft_puts on %s\n"), NULL);
+		printf(RED_TEXT("Test failed for ft_puts on [%s]\n"), NULL);
+		return ;
+	}
+	if (puts("") != ft_puts("")) {
+		printf(RED_TEXT("Test failed for ft_puts on [%s]\n"), "");
 		return ;
 	}
 	printf(GREEN_TEXT("Test Passed for ft_puts\n"));
@@ -110,10 +114,11 @@ void test_strlen(void)
 		string = get_random_data();
 		//printf("%d %d\n", strlen(string), ft_strlen(string));
 		if (strlen(string) != ft_strlen(string)) {
-			printf("Test failed for strlen");
+			printf("Test failed for strlen\n");
 			break ;
 		}
 	}
+	printf("Test passed for strlen\n");
 }
 
 void test_memcpy(void)
@@ -124,15 +129,13 @@ void test_memcpy(void)
 
 	char	*test0;
 	char	*test1;
-	for (int i = 0; i < 100; i++) {
+	for (int i = 0; i < 1000; i++) {
 		string = get_random_data();
 		test0 = memcpy(buffer0, string, strlen(string));
 		test1 = ft_memcpy(buffer1, string, strlen(string));
-		/*
-		   puts(buffer0);
-		   puts("=========================");
-		   puts(buffer1);
-		   */
+	//	   puts(buffer0);
+	//	   puts("=========================");
+	//	   puts(buffer1);
 		if (strcmp(test0, test1) != 0 || strcmp(buffer0, buffer1) != 0) {
 			printf("Test failed for memcpy\n");
 			return ;
@@ -147,51 +150,61 @@ void test_memset(void)
 	char	*buffer0 = malloc(512);
 	char	*buffer1 = malloc(512);
 	int		value;
-	for (int i = 0; i < 100; i++) {
+	for (int i = 0; i < 1000; i++) {
 		value = rand();
 		string = get_random_data();
 		memset(buffer0, value, strlen(string));
 		ft_memset(buffer1, value, strlen(string));
-		//		puts(buffer0);
-		//		puts(buffer1);
+	//			puts(buffer0);
+	//			puts(buffer1);
 		if (strcmp(buffer0, buffer1) != 0) {
 			printf("Test failed for memset\n");
 			break ;
 		}
 	}
+	printf("Test passed for memset\n");
+	//ft_memcpy("", NULL, 123);
+	//ft_memcpy("", NULL, 124);
+	//ft_memcpy("", NULL, 0);
+	//memcpy("", NULL, 0);
+	//memcpy("", "dwalkdjawkldjlaw", 123);
+	//memcpy(malloc(124), "", 123);
+	//ft_memcpy(malloc(124), "", 123);
 }
+
+#define SIZE 100000
 
 void test_strcat(void)
 {
 	char	*string;
 	char	*base;
-	char	*buffer0 = malloc(1024);
-	char	*buffer1 = malloc(1024);
-	for (int i = 0; i < 100; i++) {
+	char	*buffer0 = malloc(SIZE);
+	char	*buffer1 = malloc(SIZE);
+	
+	//bzero(buffer0, SIZE);
+	//bzero(buffer1, SIZE);
+	for (int i = 0; i < 1000; i++) {
 		string = get_random_data();
 		base = get_random_data();
 		memcpy(buffer0, base, 512);
 		memcpy(buffer1, base, 512);
-		puts("===================string===========================");
-		puts(string);
-		printf("\n%lu\n", strlen(string)); 
 		strcat(buffer0, string);
 		ft_strcat(buffer1, string);
 		//printf("%s\n", strcat(buffer0, string));
 		//printf("%s\n", ft_strcat(buffer1, string));
-		//printf("%s\n", string);
-		puts("=============");
+		printf(">>>>>>>>>>>>>>>>%s<<<<<<<<<<<<<<<<<<\n", string);
 		puts("--------------------base------------------");
 		puts(buffer0);
 		puts("===================cpy===========================");
 		puts(buffer1);
-		bzero(buffer0, 512);
-		bzero(buffer1, 512);
+	//	bzero(buffer0, 512);
+	//	bzero(buffer1, 512);
 		if (strcmp(buffer0, buffer1) != 0) {
 			printf("Test failed for strcat on %d\n", i);
-			break ;
+			return ;
 		}
 	}
+	printf("Test passed for strcat on \n");
 }
 
 void test_strdup(void)
@@ -199,7 +212,7 @@ void test_strdup(void)
 	char	*string;
 	char	*buffer0;
 	char	*buffer1;
-	for (int i = 0; i < 100; i++) {
+	for (int i = 0; i < 1000; i++) {
 		string = get_random_data();
 		buffer0 = strdup(string);
 		buffer1 = ft_strdup(string);
@@ -218,14 +231,13 @@ void test_strdup(void)
 	printf("Test passed for strdup\n");
 }
 
-void test_cat(void)
+void test_cat(int argc, char **argv)
 {
+	/*
 	int fd;
-	struct stat test;
 
 	fd = open("main.c", O_RDONLY);
 	//fd = open("/dev/urandom", O_RDONLY);
-	fstat(fd, &test);
 
 	printf("my cat    ->>>> %d\n", ft_cat(fd));
 	perror("error ?");
@@ -237,6 +249,22 @@ void test_cat(void)
 	perror("error ?");
 	printf("%d\n", ft_cat(-1));
 	perror("error ?");
+	*/
+	ft_cat(0);
+	ft_cat(open(__FILE__, O_RDONLY));
+	ft_cat(open(argv[0], O_RDONLY));
+	ft_cat(-42);
+	(void)argc;
+	(void)argv;
+}
+
+void test_cat_mmap(int argc, char **argv)
+{
+
+	ft_cat(open(__FILE__, O_RDONLY));
+	ft_cat(open(argv[0], O_RDONLY));
+	(void)argc;
+	(void)argv;
 }
 
 void test_strcmp(void)
@@ -244,9 +272,10 @@ void test_strcmp(void)
 	char	*string0 = "ca1234";
 	char	*string1 = "ca1234";
 
-	for (int i = 0; i < 100; i++) {
+	for (int i = 0; i < 100000; i++) {
 		string0 = get_random_data();
 		string1 = get_random_data();
+	/*
 		puts("=============");
 		puts("--------------------base------------------");
 		puts(string0);
@@ -257,8 +286,9 @@ void test_strcmp(void)
 		printf("%d\n", ft_strcmp(string0, string1));
 		//ft_strcmp(string0, string1);
 		puts("===================end===========================");
+	*/
 		if (ft_strcmp(string0, string1) != strcmp(string0, string1)) {
-			printf("Test failed for strcmp on %d\n", i);
+			printf("Test failed for strcmp on  s1->>[%s]\ns2->>[%s]\n", string0, string1);
 			return ;
 		}
 	}
@@ -303,7 +333,7 @@ void test_atoi(void)
 	};
 	int value0;
 	int value1;
-	for (int i = 0; i < sizeof(str_value) / sizeof(char*); i++) {
+	for (unsigned long i = 0; i < sizeof(str_value) / sizeof(char*); i++) {
 		if ((value0 = ft_atoi(str_value[i])) != (value1 = atoi(str_value[i]))) {
 			printf("Test failed for atoi >>>>>|%s|<<<< [%d] != [%d]\n", str_value[i], value0, value1);
 			return ;
@@ -354,43 +384,34 @@ char wrapp_toupper(char c)
 void test_strmap(void)
 {
 	char str[] = "je suis travail";
-	char *new = NULL;
 
 	printf("%s\n", ft_strmap(str, wrapp_toupper));
 }
 
-int main(void)
+int main(int argc, char **argv)
 {
-
+	(void)argc;
+	(void)argv;
 /*
-	test_is();
+	test_strmap();
+	test_cat(argc, argv);
+	test_cat_mmap(argc, argv);
+	test_bzero();
 	test_strlen();
 	test_puts();
 	test_memset();
 	test_memcpy();
 	test_strdup();
-	test_cat();
 	test_strcat();
 	test_strcmp();
-	test_bzero();
 	test_isblank();
 	test_atoi();
 	test_print_bits();
+	test_is();
+
 */
-	test_strmap();
 	return (0);
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 

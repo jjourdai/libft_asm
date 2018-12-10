@@ -3,21 +3,33 @@ section .text
 	extern _ft_strlen
 	extern _ft_memcpy
 
-_ft_strcat:
-	push rdi
-	push rsi
-	call _ft_strlen
-	pop rdi
-	push rdi
-	push rax
-	call _ft_strlen
+	;		char *strcat(char *s1, char *s2);
 
-	pop rdx	; get len s1
-	pop rsi ; get s2
-	pop rdi ; get s1
-	push rdi
+_ft_strcat:
+
+	push rbp
+	
+	sub rsp, 48
+	mov qword [rsp + 8], rdi
+	mov qword [rsp + 16], rsi
+
+	call _ft_strlen
+	mov qword [rsp + 24], rax 		;save s1 len
+
+	mov rdi, qword [rsp + 16]
+	call _ft_strlen
+	;mov qword [rsp + 32], rax 		;save s2 len
+
+	mov rdi, qword [rsp + 8]
+	mov rsi, qword [rsp + 16]
+	mov rdx, qword [rsp + 24]
+	
 	add rdi, rdx
 	mov rdx, rax
+	inc rdx
 	call _ft_memcpy
-	pop rax
+
+	mov rax, qword [rsp + 8]
+	add rsp, 48
+	pop rbp
 	ret

@@ -2,6 +2,9 @@ section .text
 	global _ft_memcpy
 
 _ft_memcpy:
+	cmp rdi, 0
+	je _error
+
 	push rdi
 	mov rax, rdx
 	mov rbx, 8
@@ -15,3 +18,6 @@ _ft_memcpy:
 	rep movsb
 	pop rax
 	ret	
+
+_error:
+	ret

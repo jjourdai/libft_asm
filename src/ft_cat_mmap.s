@@ -11,7 +11,7 @@ section .text
 	extern _munmap
 
 
-_ft_cat:
+_ft_cat_mmap:
 	push rdi
 	lea rsi, [rel buffer]
 	call _fstat
